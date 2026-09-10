@@ -1,0 +1,25 @@
+tweet_id,customer_text,intent,rationale,reviewed
+884049,@115888 neat feature would be playlist-specific settings i.e. ability to set diff cross fades for diff playlists #ux,complaint_feedback,Suggests a new feature for playlist-specific settings as user feedback.,no
+1556748,@115888 problems changing email address… and then support will take contact to that old email address?,account_access,Reports an issue updating an email address associated with account access.,no
+2058548,"@115888 you better put Mellowgold by Beck back on, serious",complaint_feedback,Expresses dissatisfaction regarding a missing album without asking a transactional question.,no
+2572274,@SpotifyCares USA!,other,Message contains only a location reference and lacks clear actionable context.,no
+53136,".@116130 whys the discover page changed? Where is my recommended music? I don't want ""Focus with some new music"" - none of it is tailored",complaint_feedback,Expresses frustration about changes to the discover page and recommendation features.,no
+2346333,@SpotifyCares i have a problem can anyone help please,other,Generic call for help without specific details about the issue.,no
+588853,"@115888 ""Cannot find 'api-ms-win-core-processthreads-l1-1-12.dll'. Please re-install this aplication."" Fix your shit idiots im a paying customer.",product_service_issue,Reports a specific application error regarding a missing system DLL file.,no
+155370,@115888 Walaupun hanya kekurangan angka 0 tapi bisa mengurass duit ku 😥,billing_payment,Refers to a financial loss/drain caused by a missing digit in amount.,no
+2638633,@115888 we need slime season 1 &amp; 2 by @7350,complaint_feedback,Requests missing music content without a resolvable transactional process.,no
+1019568,@SpotifyCares So you can add a song to queue after clicking on a song from the time capsule and it keeps the better layout. Why? https://t.co/1RXzuq4XCW,information_request,Asks how/why a specific app behavior and layout change occurs.,no
+44294,@SpotifyCares my wife invited me to family premium. Where do I input the invite code to accept the invitation?,information_request,Asks where to enter an invite code to join a family plan.,no
+703182,@SpotifyCares can you remove this? https://t.co/5m4CmsAN3F,booking_order_change,Requests the removal or modification of a specific item or linked content.,no
+2337994,@SpotifyCares good lookin out 💯💯💯,complaint_feedback,Sends positive feedback and praise using emojis.,no
+2131403,Hey @115888 how is ‘I Believe in A Thing Called Love’ by The Darkness NOT on Steve’s Morning Hair Grooves???,complaint_feedback,Complains about a specific song missing from a curated playlist.,no
+637649,.@115888 WHERE IS THE 2004 WORLDWIDE HIT “LEAVE (GET OUT)” BY JOJO???????,complaint_feedback,Expresses frustration about unavailable music on the platform.,no
+2597256,@SpotifyCares why was all of scars on broadway's stuff taken off,information_request,Asks why an artist's music was removed from the service.,no
+1952764,"@SpotifyCares I mean my pc is just fine in terms of speed and I have an S8 Samsung, but damn, this application is just slow. Since years...",complaint_feedback,Complains about overall application slowness across devices.,no
+492435,"@131098 net een premium account omgezet in Family account. Hoe kan ik mijn dochter, die nog geen account heeft, toevoegen? Ze heeft wel de mail ontvangen met de uitnodigingcode... #help #premiumforfamily #spotify #spotifynederland",information_request,Asks how to add a family member after converting to a family account.,no
+482497,@229753 @SpotifyCares can you fix this glitch?,product_service_issue,Requests a fix for a software glitch.,no
+2939718,"@115888 Hi guys, how do I stop someone using my Spotify? Someone keeps listening on my account... 
+
+I'm certain I don't know them as all the songs are in Spanish...
+
+PLEASE HELP!",account_access,Asks how to secure an account being accessed by an unauthorized user.,no

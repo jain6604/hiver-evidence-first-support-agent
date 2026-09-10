@@ -1,0 +1,25 @@
+tweet_id,customer_text,intent,rationale,reviewed
+884049,@115888 neat feature would be playlist-specific settings i.e. ability to set diff cross fades for diff playlists #ux,complaint_feedback,The user is suggesting a new feature idea for playlist-specific settings without requesting account changes.,no
+1556748,@115888 problems changing email address… and then support will take contact to that old email address?,account_access,The user is experiencing issues updating their email address for account access and support communications.,no
+2058548,"@115888 you better put Mellowgold by Beck back on, serious",complaint_feedback,The user is expressing dissatisfaction about missing content and demanding its return.,no
+2572274,@SpotifyCares USA!,other,The message contains only a country name and lacks actionable context or intent.,no
+53136,".@116130 whys the discover page changed? Where is my recommended music? I don't want ""Focus with some new music"" - none of it is tailored",complaint_feedback,The user expresses dissatisfaction with changes to the discover page and recommendation features.,no
+2346333,@SpotifyCares i have a problem can anyone help please,other,Generic call for help without specific details to classify into a distinct intent.,no
+588853,"@115888 ""Cannot find 'api-ms-win-core-processthreads-l1-1-12.dll'. Please re-install this aplication."" Fix your shit idiots im a paying customer.",product_service_issue,Reports a specific system error and missing DLL file breaking the application.,no
+155370,@115888 Walaupun hanya kekurangan angka 0 tapi bisa mengurass duit ku 😥,billing_payment,The user is expressing distress over a financial discrepancy affecting their money.,no
+2638633,@115888 we need slime season 1 &amp; 2 by @7350,complaint_feedback,Expresses feedback/desire for specific music albums to be added to the platform.,no
+1019568,@SpotifyCares So you can add a song to queue after clicking on a song from the time capsule and it keeps the better layout. Why? https://t.co/1RXzuq4XCW,information_request,Asks a question about how the app UI layout behavior functions.,no
+44294,@SpotifyCares my wife invited me to family premium. Where do I input the invite code to accept the invitation?,information_request,Asks how to input an invitation code for a family plan.,no
+703182,@SpotifyCares can you remove this? https://t.co/5m4CmsAN3F,booking_order_change,Requests the removal or deletion of a specific linked item or playlist.,no
+2337994,@SpotifyCares good lookin out 💯💯💯,complaint_feedback,Sends positive praise and appreciation using slang and emojis.,no
+2131403,Hey @115888 how is ‘I Believe in A Thing Called Love’ by The Darkness NOT on Steve’s Morning Hair Grooves???,complaint_feedback,Questions playlist curation and expresses dissatisfaction about a missing song.,no
+637649,.@115888 WHERE IS THE 2004 WORLDWIDE HIT “LEAVE (GET OUT)” BY JOJO???????,complaint_feedback,Expresses dissatisfaction over a specific song missing from the platform.,no
+2597256,@SpotifyCares why was all of scars on broadway's stuff taken off,information_request,Asks why an artist's content was removed from the service.,no
+1952764,"@SpotifyCares I mean my pc is just fine in terms of speed and I have an S8 Samsung, but damn, this application is just slow. Since years...",complaint_feedback,Complains about overall application slowness across devices over a long period.,no
+492435,"@131098 net een premium account omgezet in Family account. Hoe kan ik mijn dochter, die nog geen account heeft, toevoegen? Ze heeft wel de mail ontvangen met de uitnodigingcode... #help #premiumforfamily #spotify #spotifynederland",information_request,Asks for instructions on how to add a family member to their subscription plan.,no
+482497,@229753 @SpotifyCares can you fix this glitch?,product_service_issue,Requests a fix for an app glitch or software bug.,no
+2939718,"@115888 Hi guys, how do I stop someone using my Spotify? Someone keeps listening on my account... 
+
+I'm certain I don't know them as all the songs are in Spanish...
+
+PLEASE HELP!",account_access,Asks how to stop an unauthorized user from accessing and using their account.,no
