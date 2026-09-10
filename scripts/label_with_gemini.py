@@ -21,7 +21,8 @@ def main() -> None:
     parser.add_argument("--output", default="data/annotations/train_drafts.csv")
     parser.add_argument("--n", type=int, default=500)
     parser.add_argument("--seed", type=int, default=7)
-    parser.add_argument("--start", type=int, default=0, help="Offset into a seeded 2,000-row candidate pool for resumable batches.")
+    parser.add_argument("--start", type=int, default=0, help="Offset into a seeded 2,000-row candidate pool.")
+    parser.add_argument("--resume", action="store_true", help="Append only tweet IDs not already present in --output.")
     args = parser.parse_args()
     load_dotenv()
     if not os.getenv("GEMINI_API_KEY"):
@@ -29,6 +30,13 @@ def main() -> None:
     pairs = pd.read_csv(args.pairs)
     pool = pairs.sample(n=min(2_000, len(pairs)), random_state=args.seed)
     rows = pool.iloc[args.start : args.start + args.n][["tweet_id", "customer_text"]].copy()
+    output = Path(args.output)
+    if args.resume and output.exists():
+        existing = pd.read_csv(output, dtype={"tweet_id": str})
+        rows = rows[~rows.tweet_id.astype(str).isin(existing.tweet_id.astype(str))]
+    if rows.empty:
+        print("No new rows to label.")
+        return
     definitions = json.dumps(INTENT_DEFINITIONS, indent=2)
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     model = os.getenv("GEMINI_MODEL", "gemini-3.6-flash")
@@ -51,8 +59,10 @@ def main() -> None:
         print(f"Draft-labelled {min(start + 20, len(rows))}/{len(rows)}", flush=True)
     labelled = rows.merge(pd.DataFrame(labels), on="tweet_id", how="left")
     labelled["reviewed"] = "no"
-    output = Path(args.output)
+    labelled["annotation_source"] = "ai_assisted_gemini_draft"
     output.parent.mkdir(parents=True, exist_ok=True)
+    if args.resume and output.exists():
+        labelled = pd.concat([pd.read_csv(output), labelled], ignore_index=True).drop_duplicates("tweet_id", keep="last")
     labelled.to_csv(output, index=False)
     print(f"Wrote reviewable Gemini drafts to {output}")
 

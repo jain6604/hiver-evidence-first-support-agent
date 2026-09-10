@@ -35,10 +35,11 @@ incoming message
 ### Reproduce the evaluation
 
 1. Generate the golden pack: `python scripts/make_annotation_pack.py`.
-2. Independently human-label 150–250 examples using [the guide](data/golden/LABELING_GUIDE.md). Keep this set held out.
-3. Produce a separately reviewed development set at `data/annotations/train.csv`. `scripts/label_with_gemini.py` creates reviewable drafts; Gemini labels are never treated as human gold labels.
-4. Run `python scripts/evaluate.py`. It rejects train/golden tweet overlap and excludes golden tweets from retrieval.
-5. Generate replies on the held-out set, score them with `scripts/judge_replies.py`, and independently human-rate a random 40-row sample using `data/golden/HUMAN_JUDGE_TEMPLATE.csv`. Report agreement as exact verdict agreement and per-dimension Spearman correlation.
+2. Human-label 150–250 held-out rows using [the guide](data/golden/LABELING_GUIDE.md), then run `python scripts/validate_labels.py`.
+3. Produce reviewable development drafts with `python scripts/label_with_gemini.py --resume`; only rows marked reviewed by a person may be used as human-reviewed labels. The checked-in smoke labels are explicitly `ai_assisted_heuristic`.
+4. Run `python scripts/evaluate.py --golden data/golden/golden_set_ai_assisted.csv --live-replies 5`. It rejects train/golden overlap, excludes golden tweets from retrieval, writes predictions and five failure cases, and caps live Gemini calls for the free tier.
+5. Run `python scripts/judge_replies.py --input artifacts/full_system_predictions.csv --resume`. It checkpoints genuine judge rows; quota-limited or unjudged rows remain unscored.
+6. Create the blank 40-row human sample with `python scripts/make_human_review_sample.py`, fill it independently, and run `python scripts/compute_human_agreement.py`. Agreement is reported only after genuine human ratings are present.
 
 ## Safety policy
 
@@ -49,7 +50,8 @@ The system escalates when it sees sensitive markers, account/payment intents, lo
 - `scripts/prepare_data.py` — extracts direct inbound -> SpotifyCares resolution pairs.
 - `scripts/make_annotation_pack.py` — creates the seeded, stratified golden evaluation CSV.
 - `src/hiver_agent/` — classifier, retrieval, routing, and Gemini generation code.
-- `scripts/evaluate.py` — baseline and full-system intent/routing metrics with leakage checks.
+- `scripts/evaluate.py` — majority, keyword, and full-system intent/routing metrics, held-out replies, and failure exports.
+- `scripts/validate_labels.py` — required-field, taxonomy, duplicate, source-membership, and split-leakage validation.
 - `scripts/judge_replies.py` — published LLM-as-judge rubric.
 - `report/REPORT.md` — six-page-equivalent submission report, completed after evaluation.
 - `DECISION_LOG.md` — non-obvious design decisions and trade-offs.

@@ -24,6 +24,8 @@ def main() -> None:
     gold["intent"] = gold.customer_text.map(label)
     gold["route"] = [decide_route(intent=intent, confidence=0.99, evidence_score=0.99, message=message).action for intent, message in zip(gold.intent, gold.customer_text)]
     gold["route_reason"] = "AI-assisted bootstrap label; requires human review before production use."
+    gold["reply_grounded"] = "yes"
+    gold["notes"] = "AI-assisted heuristic: historical agent reply is present; human grounding review is pending."
     gold["annotation_source"] = "ai_assisted_heuristic"
     gold.to_csv("data/golden/golden_set_ai_assisted.csv", index=False)
 
