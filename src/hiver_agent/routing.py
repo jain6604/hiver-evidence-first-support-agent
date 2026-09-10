@@ -25,6 +25,6 @@ def decide_route(*, intent: str, confidence: float, evidence_score: float, messa
         return RoutingDecision("escalate", f"{intent} is excluded from automation by policy.")
     if confidence < 0.70:
         return RoutingDecision("escalate", f"Intent confidence {confidence:.2f} is below the 0.70 threshold.")
-    if evidence_score < 0.35:
-        return RoutingDecision("escalate", f"Historical-resolution evidence score {evidence_score:.2f} is below 0.35.")
+    if evidence_score < 0.10:
+        return RoutingDecision("escalate", f"Historical-resolution evidence score {evidence_score:.2f} is below 0.10.")
     return RoutingDecision("auto_handle", "Supported low-risk intent with confident classification and relevant historical evidence.")

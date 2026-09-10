@@ -42,7 +42,7 @@ incoming message
 
 ## Safety policy
 
-The system escalates when it sees sensitive markers, account/payment intents, low intent confidence (<0.70), or weak retrieval evidence (<0.35). This lower automation rate is intentional: a social-support reply that is confidently wrong is worse than a timely human handoff.
+The system escalates when it sees sensitive markers, account/payment intents, low intent confidence (<0.70), or weak retrieval evidence (<0.10). This lower automation rate is intentional: a social-support reply that is confidently wrong is worse than a timely human handoff.
 
 ## Repository map
 
