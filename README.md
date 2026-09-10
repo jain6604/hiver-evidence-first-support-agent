@@ -39,7 +39,7 @@ incoming message
 3. Produce reviewable development drafts with `python scripts/label_with_gemini.py --resume`; only rows marked reviewed by a person may be used as human-reviewed labels. The checked-in smoke labels are explicitly `ai_assisted_heuristic`.
 4. Run `python scripts/evaluate.py --golden data/golden/golden_set.csv --live-replies 0`. It rejects train/golden overlap, excludes golden tweets from retrieval, writes predictions and five failure cases, and uses explicit safe fallbacks when Gemini quota is unavailable.
 5. Run `python scripts/judge_replies.py --input artifacts/full_system_predictions.csv --resume`. It checkpoints genuine judge rows; quota-limited or unjudged rows remain unscored.
-6. Create the blank 40-row human sample with `python scripts/make_human_review_sample.py`, fill it independently, and run `python scripts/compute_human_agreement.py`. Agreement is reported only after genuine human ratings are present.
+6. Create the 40-row human sample with `python scripts/make_human_review_sample.py`, fill it independently, and run `python scripts/compute_human_agreement.py`. Human summary is reported after ratings are present; LLM-human agreement remains pending if Gemini judge output is unavailable.
 
 ## Safety policy
 

@@ -38,7 +38,7 @@ Command: `PYTHONPATH=src .venv/Scripts/python.exe scripts/evaluate.py --golden d
 | Escalation safety | 1.000 | 0.982 | 1.000 |
 | LLM-judge pass rate | N/A | N/A | Pending (0 completed; quota exhausted) |
 
-The LLM judge scores relevance, groundedness, safety, tone, and actionability from 1–5 and fails unsafe/invented claims. The human-gold judge run completed zero rows because the Gemini free-tier quota was exhausted; no pass rate is reported. Human reply ratings and agreement are also pending, so no human agreement number is reported.
+The LLM judge scores relevance, groundedness, safety, tone, and actionability from 1–5 and fails unsafe/invented claims. The human reviewer rated all 40 sampled drafts: pass rate 0.000; mean relevance 2.400, groundedness 2.500, safety 5.000, tone 3.975, and actionability 1.900. Gemini comparison agreement is pending because the API quota prevented judge rows from being produced; no LLM-human agreement number is reported.
 
 ## 5. Failure analysis
 
