@@ -37,7 +37,7 @@ incoming message
 1. Generate the golden pack: `python scripts/make_annotation_pack.py`.
 2. Human-label 150–250 held-out rows using [the guide](data/golden/LABELING_GUIDE.md), then run `python scripts/validate_labels.py`.
 3. Produce reviewable development drafts with `python scripts/label_with_gemini.py --resume`; only rows marked reviewed by a person may be used as human-reviewed labels. The checked-in smoke labels are explicitly `ai_assisted_heuristic`.
-4. Run `python scripts/evaluate.py --golden data/golden/golden_set_ai_assisted.csv --live-replies 5`. It rejects train/golden overlap, excludes golden tweets from retrieval, writes predictions and five failure cases, and caps live Gemini calls for the free tier.
+4. Run `python scripts/evaluate.py --golden data/golden/golden_set.csv --live-replies 0`. It rejects train/golden overlap, excludes golden tweets from retrieval, writes predictions and five failure cases, and uses explicit safe fallbacks when Gemini quota is unavailable.
 5. Run `python scripts/judge_replies.py --input artifacts/full_system_predictions.csv --resume`. It checkpoints genuine judge rows; quota-limited or unjudged rows remain unscored.
 6. Create the blank 40-row human sample with `python scripts/make_human_review_sample.py`, fill it independently, and run `python scripts/compute_human_agreement.py`. Agreement is reported only after genuine human ratings are present.
 
@@ -52,6 +52,7 @@ The system escalates when it sees sensitive markers, account/payment intents, lo
 - `src/hiver_agent/` — classifier, retrieval, routing, and Gemini generation code.
 - `scripts/evaluate.py` — majority, keyword, and full-system intent/routing metrics, held-out replies, and failure exports.
 - `scripts/validate_labels.py` — required-field, taxonomy, duplicate, source-membership, and split-leakage validation.
+- `scripts/apply_human_labels.py` — resumably records explicit human decisions by tweet ID.
 - `scripts/judge_replies.py` — published LLM-as-judge rubric.
 - `report/REPORT.md` — six-page-equivalent submission report, completed after evaluation.
 - `DECISION_LOG.md` — non-obvious design decisions and trade-offs.

@@ -10,7 +10,7 @@ I built a public-channel support agent for SpotifyCares-like customer messages. 
 
 Source: the public Customer Support on Twitter dataset (ThoughtVector / Kaggle). I extracted direct inbound customer tweet -> SpotifyCares response pairs, filtered malformed/very short messages, and selected a fixed random 10,000-pair subsample (seed 42).
 
-The evaluated set contains 200 real, deduplicated customer messages sampled across coarse issue buckets. The current checked-in labels are `ai_assisted_heuristic` bootstrap labels, not human gold labels; human review is pending. It is held out from classifier training and retrieval, and `scripts/validate_labels.py` checks required fields and tweet-ID leakage. A blank 40-row human reply-review sample is generated at `data/golden/HUMAN_REVIEW_SAMPLE.csv`.
+The evaluated set contains 200 real, deduplicated customer messages sampled across coarse issue buckets. All 200 intent, route, and grounding rows are now explicitly marked `human_reviewed` after interactive review. The set is held out from classifier training and retrieval, and `scripts/validate_labels.py` checks required fields and tweet-ID leakage. A blank 40-row human reply-review sample is generated at `data/golden/HUMAN_REVIEW_SAMPLE.csv`.
 
 ## 3. System and baselines
 
@@ -24,25 +24,25 @@ The full system’s retrieval layer searches only non-golden pairs. Its prompt f
 
 ## 4. Results
 
-Command: `PYTHONPATH=src .venv/Scripts/python.exe scripts/evaluate.py --golden data/golden/golden_set_ai_assisted.csv --live-replies 5`. Metrics below are from `artifacts/evaluation.json`; intent and routing labels are AI-assisted and require human review before production interpretation.
+Command: `PYTHONPATH=src .venv/Scripts/python.exe scripts/evaluate.py --golden data/golden/golden_set.csv --live-replies 0`. Metrics below are from `artifacts/evaluation.json` and use the human-reviewed golden labels. `--live-replies 0` was used for the reproducible final run after Gemini quota exhaustion; drafts remain auditable safe fallbacks and none were released.
 
 | Metric | Majority | Simple | Full |
 |---|---:|---:|---:|
-| Golden intent macro-F1 | 0.062 | 0.802 | 0.568 |
-| Golden intent accuracy | 0.280 | 0.920 | 0.645 |
+| Golden intent macro-F1 | 0.044 | 0.464 | 0.382 |
+| Golden intent accuracy | 0.180 | 0.555 | 0.450 |
 | Auto-handle precision | 0.000 | 0.978 | 0.000 |
 | Auto-handle recall | 0.000 | 0.989 | 0.000 |
 | Auto-handle F1 | 0.000 | 0.983 | 0.000 |
 | Auto-handle rate | 0.000 | 0.445 | 0.000 |
-| Escalation precision / recall / F1 | 0.560 / 1.000 / 0.718 | 0.991 / 0.982 / 0.987 | 0.560 / 1.000 / 0.718 |
+| Escalation precision / recall / F1 | 0.545 / 1.000 / 0.706 | 0.667 / 0.679 / 0.673 | 0.545 / 1.000 / 0.706 |
 | Escalation safety | 1.000 | 0.982 | 1.000 |
-| LLM-judge pass rate | N/A | N/A | 3/3 (n=3 only) |
+| LLM-judge pass rate | N/A | N/A | Pending (0 completed; quota exhausted) |
 
-The LLM judge scores relevance, groundedness, safety, tone, and actionability from 1–5 and fails unsafe/invented claims. Three genuine rows completed before the Gemini free-tier quota was exhausted, all passed; 197 rows remain unjudged. Human ratings and agreement are pending, so no human agreement number is reported.
+The LLM judge scores relevance, groundedness, safety, tone, and actionability from 1–5 and fails unsafe/invented claims. The human-gold judge run completed zero rows because the Gemini free-tier quota was exhausted; no pass rate is reported. Human reply ratings and agreement are also pending, so no human agreement number is reported.
 
 ## 5. Failure analysis
 
-Five real held-out failures are exported in `artifacts/failure_cases.csv`. Examples include email-account access predicted as billing, a premium-offer complaint predicted as billing, a changed-card/account message predicted as billing, a premium-how-to request predicted as account access, and a Filipino premium message predicted as other. In each case the file retains the full customer message, predicted intent/action, retrieved evidence, observed intent mismatch, and the hypothesis that lexical similarity or the coarse taxonomy missed the primary issue.
+Five real held-out failures are exported in `artifacts/failure_cases.csv`. They include account-email access predicted as billing, a payment failure predicted as account access, playback trouble predicted as account access, a feature question predicted as account access, and a safety-sensitive message predicted as account access. In each case the file retains the full customer message, predicted intent/action, retrieved evidence, observed mismatch, and the hypothesis that lexical similarity or the coarse taxonomy missed the primary issue.
 
 ## 6. What is misleading about my headline number?
 
